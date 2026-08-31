@@ -6,6 +6,7 @@ import br.edu.cafeteria.modelo.ClienteComum;
 import br.edu.cafeteria.modelo.ClienteVIP;
 import br.edu.cafeteria.servico.BuscaBinariaClientes;
 import br.edu.cafeteria.servico.ResultadoBuscaCliente;
+import br.edu.cafeteria.servico.TabelaHashClientes;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -37,6 +38,8 @@ public class TelaBuscaClientes extends JFrame {
 
     private final Cliente[] clientes = CatalogoClientes.criarClientesOrdenados();
     private final BuscaBinariaClientes buscaBinaria = new BuscaBinariaClientes();
+    private final TabelaHashClientes tabelaHash = new TabelaHashClientes(clientes);
+
 
     private final JComboBox<String> comboFiltro = new JComboBox<>(new String[]{"Nome", "CPF"});
     private final JTextField campoBusca = new JTextField(22);
@@ -194,10 +197,23 @@ public class TelaBuscaClientes extends JFrame {
 
         // Roteia a busca dependendo da escolha no ComboBox
         if ("CPF".equals(filtro)) {
-            resposta = buscaBinaria.buscarPorCpf(clientes, termo);
+            // Tabela Hash para Cpf
+            resposta = tabelaHash.buscarPorCpf(termo);
         } else {
+            // Busca Binária para Nome
             resposta = buscaBinaria.buscarPorNome(clientes, termo);
         }
+
+        if ("CPF".equals(filtro)) {
+                    System.out.println("[DEBUG] Buscando CPF digitado na tela: '" + termo + "'");
+                    resposta = tabelaHash.buscarPorCpf(termo);
+                    System.out.println("[DEBUG] Encontrou? " + resposta.encontrou());
+                    if (resposta.encontrou()) {
+                        System.out.println("[DEBUG] Cliente retornado: " + resposta.getCliente().getNome());
+                    }
+                } else {
+                    resposta = buscaBinaria.buscarPorNome(clientes, termo);
+                }
 
         exibirResposta(resposta);
     }
@@ -219,11 +235,16 @@ public class TelaBuscaClientes extends JFrame {
         }
 
         double microssegundos = resposta.getTempoNanossegundos() / 1_000.0;
-        desempenho.setText(String.format(
-                "Tempo: %d ns (%.3f µs) | Comparações: %d | Complexidade: O(log N)",
-                resposta.getTempoNanossegundos(),
-                microssegundos,
-                resposta.getComparacoes()));
+
+                // Define o texto da complexidade dependendo de qual busca foi feita
+                String complexidade = "Nome".equals(comboFiltro.getSelectedItem()) ? "O(log N)" : "O(1)";
+
+                desempenho.setText(String.format(
+                        "Tempo: %d ns (%.3f µs) | Comparações: %d | Complexidade: %s",
+                        resposta.getTempoNanossegundos(),
+                        microssegundos,
+                        resposta.getComparacoes(),
+                        complexidade));
     }
 
     private void selecionarClienteNaTabela(Cliente cliente) {
@@ -242,7 +263,6 @@ public class TelaBuscaClientes extends JFrame {
         return "Desconhecido";
     }
 
-    // Método main apenas para testar a tela individualmente
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(() -> {
             new TelaBuscaClientes().setVisible(true);
