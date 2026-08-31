@@ -114,6 +114,9 @@ Ao executar a classe `Main`, o sistema abre o painel central da **Geek Byte Brew
 3. Abrir o cadastro de membros e pesquisar um cliente pelo nome ou pelo CPF.
 4. Comparar as estratégias utilizadas em cada tipo de consulta.
 
+### Capturas de Tela do Sistema
+<img src="Docs/assets/foto1" width="300"/> <img src="Docs/assets/foto2" width="300"/> <img src="Docs/assets/foto3" width="300"/><img src="Docs/assets/foto4" width="300"/>
+
 ## Equipe de Desenvolvimento
 
 | **Gabriel Ferreira** | **Maria Laura Cabral** |
