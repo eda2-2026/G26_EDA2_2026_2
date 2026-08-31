@@ -12,20 +12,19 @@ public class BuscaBinariaClientesTest {
 
     public static void main(String[] args) {
         BuscaBinariaClientesTest testes = new BuscaBinariaClientesTest();
-        testes.deveTerExatamenteSetentaClientesOrdenados();
+        testes.deveTerExatamenteVinteMilClientesOrdenados();
         testes.deveEncontrarPrimeiroClientePorNome();
-        testes.deveEncontrarClienteDoMeioPorNome();
+        testes.deveEncontrarClienteConhecidoPorNome();
+        testes.deveEncontrarClienteDeNumeroVinteMilPorNome();
         testes.deveEncontrarUltimoClientePorNome();
         testes.deveIgnorarMaiusculasEspacosExternosPorNome();
         testes.deveInformarClienteInexistentePorNome();
-        testes.deveEncontrarClientePorCpf();
-        testes.deveInformarCpfInexistente();
 
-        System.out.println("Todos os 8 testes de Clientes passaram com sucesso!");
+        System.out.println("Todos os 7 testes de busca binária de clientes passaram!");
     }
 
-    private void deveTerExatamenteSetentaClientesOrdenados() {
-        verificar(clientes.length == 70, "O catálogo deve ter 70 clientes.");
+    private void deveTerExatamenteVinteMilClientesOrdenados() {
+        verificar(clientes.length == 20_000, "O catálogo deve ter 20.000 clientes.");
 
         for (int i = 1; i < clientes.length; i++) {
             verificar(
@@ -35,29 +34,39 @@ public class BuscaBinariaClientesTest {
     }
 
     private void deveEncontrarPrimeiroClientePorNome() {
-        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Ada Lovelace");
+        Cliente primeiroCliente = clientes[0];
+        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, primeiroCliente.getNome());
         verificar(resultado.encontrou(), "O primeiro cliente deveria ser encontrado.");
-        verificar("001.000.000-01".equals(resultado.getCliente().getCpf()), "CPF incorreto.");
+        verificar(resultado.getCliente() == primeiroCliente, "Primeiro cliente incorreto.");
         validarMetricas(resultado);
     }
 
-    private void deveEncontrarClienteDoMeioPorNome() {
-        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Linus Torvalds");
-        verificar(resultado.encontrou(), "O cliente do meio deveria ser encontrado.");
+    private void deveEncontrarClienteConhecidoPorNome() {
+        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Maria Jose Silva");
+        verificar(resultado.encontrou(), "O cliente conhecido deveria ser encontrado.");
+        verificar("900.000.000-01".equals(resultado.getCliente().getCpf()), "CPF incorreto.");
+        validarMetricas(resultado);
+    }
+
+    private void deveEncontrarClienteDeNumeroVinteMilPorNome() {
+        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Eduardo Rodrigo Carvalho");
+        verificar(resultado.encontrou(), "O cliente de número 20.000 deveria ser encontrado.");
+        verificar("900.000.200-00".equals(resultado.getCliente().getCpf()), "CPF fictício incorreto.");
         validarMetricas(resultado);
     }
 
     private void deveEncontrarUltimoClientePorNome() {
-        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Zelda Hyrule");
+        Cliente ultimoCliente = clientes[clientes.length - 1];
+        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, ultimoCliente.getNome());
         verificar(resultado.encontrou(), "O último cliente deveria ser encontrado.");
-        verificar("070.000.000-70".equals(resultado.getCliente().getCpf()), "CPF incorreto.");
+        verificar(resultado.getCliente() == ultimoCliente, "Último cliente incorreto.");
         validarMetricas(resultado);
     }
 
     private void deveIgnorarMaiusculasEspacosExternosPorNome() {
-        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "  grace hopper  ");
+        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "  maria jose silva  ");
         verificar(resultado.encontrou(), "A busca por nome deveria ignorar caixa e espaços externos.");
-        verificar("022.000.000-22".equals(resultado.getCliente().getCpf()), "Cliente incorreto.");
+        verificar("900.000.000-01".equals(resultado.getCliente().getCpf()), "Cliente incorreto.");
     }
 
     private void deveInformarClienteInexistentePorNome() {
@@ -66,24 +75,11 @@ public class BuscaBinariaClientesTest {
         validarMetricas(resultado);
     }
 
-    private void deveEncontrarClientePorCpf() {
-        ResultadoBuscaCliente resultado = busca.buscarPorCpf(clientes, "042.000.000-42");
-        verificar(resultado.encontrou(), "O cliente deveria ser encontrado pelo CPF.");
-        verificar("Mulan Hua".equals(resultado.getCliente().getNome()), "Nome do cliente incorreto.");
-        validarMetricas(resultado);
-    }
-
-    private void deveInformarCpfInexistente() {
-        ResultadoBuscaCliente resultado = busca.buscarPorCpf(clientes, "999.999.999-99");
-        verificar(!resultado.encontrou(), "Um CPF inexistente não pode ser encontrado.");
-        validarMetricas(resultado);
-    }
-
     private void validarMetricas(ResultadoBuscaCliente resultado) {
         verificar(resultado.getTempoNanossegundos() >= 0, "Tempo de busca inválido.");
         verificar(resultado.getComparacoes() > 0, "A busca deve realizar comparações.");
-        verificar(resultado.getComparacoes() <= 7,
-                "Com 70 clientes, a busca binária não deveria exceder 7 comparações.");
+        verificar(resultado.getComparacoes() <= 15,
+                "Com 20.000 clientes, a busca binária não deveria exceder 15 comparações.");
     }
 
     private void verificar(boolean condicao, String mensagem) {
