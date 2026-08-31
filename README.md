@@ -118,5 +118,6 @@ Ao executar a classe `Main`, o sistema abre o painel central da **Geek Byte Brew
 
 | **Gabriel Ferreira** | **Maria Laura Cabral** |
 | :---: | :---: |
+| <img src="https://github.com/diangellis.png" width="120px" style="border-radius:50%;" /> | <img src="https://github.com/Maria-Laura-Regis.png" width="120px" style="border-radius:50%;" /> |
 | Matrícula: **242004671** | Matrícula: **232005361** |
 | [`@diangellis`](https://github.com/diangellis) | [`@Maria-Laura-Regis`](https://github.com/Maria-Laura-Regis) |
