@@ -95,7 +95,7 @@ public class TelaBuscaClientes extends JFrame {
         titulo.setForeground(AZUL_ESCURO);
 
         JLabel subtitulo = new JLabel(
-                "Catálogo com 70 clientes ordenados", SwingConstants.CENTER);
+                "Base com 20.000 clientes ordenados", SwingConstants.CENTER);
         subtitulo.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
 
         JPanel textos = new JPanel(new GridLayout(2, 1));
@@ -195,25 +195,11 @@ public class TelaBuscaClientes extends JFrame {
         String filtro = (String) comboFiltro.getSelectedItem();
         ResultadoBuscaCliente resposta;
 
-        // Roteia a busca dependendo da escolha no ComboBox
         if ("CPF".equals(filtro)) {
-            // Tabela Hash para Cpf
             resposta = tabelaHash.buscarPorCpf(termo);
         } else {
-            // Busca Binária para Nome
             resposta = buscaBinaria.buscarPorNome(clientes, termo);
         }
-
-        if ("CPF".equals(filtro)) {
-                    System.out.println("[DEBUG] Buscando CPF digitado na tela: '" + termo + "'");
-                    resposta = tabelaHash.buscarPorCpf(termo);
-                    System.out.println("[DEBUG] Encontrou? " + resposta.encontrou());
-                    if (resposta.encontrou()) {
-                        System.out.println("[DEBUG] Cliente retornado: " + resposta.getCliente().getNome());
-                    }
-                } else {
-                    resposta = buscaBinaria.buscarPorNome(clientes, termo);
-                }
 
         exibirResposta(resposta);
     }
@@ -235,16 +221,14 @@ public class TelaBuscaClientes extends JFrame {
         }
 
         double microssegundos = resposta.getTempoNanossegundos() / 1_000.0;
+        String complexidade = "Nome".equals(comboFiltro.getSelectedItem()) ? "O(log N)" : "O(1)";
 
-                // Define o texto da complexidade dependendo de qual busca foi feita
-                String complexidade = "Nome".equals(comboFiltro.getSelectedItem()) ? "O(log N)" : "O(1)";
-
-                desempenho.setText(String.format(
-                        "Tempo: %d ns (%.3f µs) | Comparações: %d | Complexidade: %s",
-                        resposta.getTempoNanossegundos(),
-                        microssegundos,
-                        resposta.getComparacoes(),
-                        complexidade));
+        desempenho.setText(String.format(
+                "Tempo: %d ns (%.3f µs) | Comparações: %d | Complexidade: %s",
+                resposta.getTempoNanossegundos(),
+                microssegundos,
+                resposta.getComparacoes(),
+                complexidade));
     }
 
     private void selecionarClienteNaTabela(Cliente cliente) {

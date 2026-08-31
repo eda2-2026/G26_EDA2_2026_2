@@ -15,29 +15,33 @@ public class TabelaHashClientesTest {
         testes.deveEncontrarPrimeiroClientePorCpf();
         testes.deveEncontrarClienteQualquerPorCpf();
         testes.deveEncontrarUltimoClientePorCpf();
+        testes.deveEncontrarClienteDeNumeroVinteMilPorCpf();
         testes.deveInformarCpfInexistente();
 
         System.out.println("Todos os testes da Tabela Hash passaram com sucesso!");
     }
 
     private void deveEncontrarPrimeiroClientePorCpf() {
-        ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf("001.000.000-01");
-        verificar(resultado.encontrou(), "O cliente com CPF 001.000.000-01 deveria ser encontrado.");
-        verificar("Ada Lovelace".equals(resultado.getCliente().getNome()), "Nome do cliente incorreto.");
+        Cliente primeiroCliente = clientes[0];
+        ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf(primeiroCliente.getCpf());
+        verificar(resultado.encontrou(), "O primeiro cliente deveria ser encontrado pelo CPF.");
+        verificar(resultado.getCliente() == primeiroCliente, "Primeiro cliente incorreto.");
         validarMetricasHash(resultado);
     }
 
     private void deveEncontrarClienteQualquerPorCpf() {
-        ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf("042.000.000-42");
-        verificar(resultado.encontrou(), "O cliente com CPF 042.000.000-42 deveria ser encontrado.");
-        verificar("Mulan Hua".equals(resultado.getCliente().getNome()), "Nome do cliente incorreto.");
+        ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf("900.000.000-42");
+        verificar(resultado.encontrou(), "O cliente com CPF 900.000.000-42 deveria ser encontrado.");
+        verificar("Maria Santos Araujo".equals(resultado.getCliente().getNome()),
+                "Nome do cliente incorreto.");
         validarMetricasHash(resultado);
     }
 
     private void deveEncontrarUltimoClientePorCpf() {
-        ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf("070.000.000-70");
-        verificar(resultado.encontrou(), "O cliente com CPF 070.000.000-70 deveria ser encontrado.");
-        verificar("Zelda Hyrule".equals(resultado.getCliente().getNome()), "Nome do cliente incorreto.");
+        Cliente ultimoCliente = clientes[clientes.length - 1];
+        ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf(ultimoCliente.getCpf());
+        verificar(resultado.encontrou(), "O último cliente deveria ser encontrado pelo CPF.");
+        verificar(resultado.getCliente() == ultimoCliente, "Último cliente incorreto.");
         validarMetricasHash(resultado);
     }
 
@@ -47,13 +51,19 @@ public class TabelaHashClientesTest {
         verificar(resultado.getTempoNanossegundos() >= 0, "Tempo de busca inválido.");
     }
 
+    private void deveEncontrarClienteDeNumeroVinteMilPorCpf() {
+        ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf("90000020000");
+        verificar(resultado.encontrou(), "O cliente de número 20.000 deveria ser encontrado pelo CPF.");
+        verificar("Eduardo Batista Soares".equals(resultado.getCliente().getNome()),
+                "Nome do cliente incorreto.");
+        validarMetricasHash(resultado);
+    }
+
     private void validarMetricasHash(ResultadoBuscaCliente resultado) {
         verificar(resultado.getTempoNanossegundos() >= 0, "Tempo de busca inválido.");
         verificar(resultado.getComparacoes() > 0, "A busca deve realizar pelo menos 1 comparação.");
-        // Na Tabela Hash com encadeamento separado, para 70 itens e tamanho 97,
-        // a quantidade de comparações em buscas bem-sucedidas é praticamente O(1) (geralmente 1 a 3 comparações).
-        verificar(resultado.getComparacoes() <= 3,
-                "Na Tabela Hash, a busca não deveria exceder 3 comparações no cenário ideal.");
+        verificar(resultado.getComparacoes() <= 5,
+                "Na tabela hash dimensionada, a busca não deveria exceder 5 comparações.");
     }
 
     private void verificar(boolean condicao, String mensagem) {
