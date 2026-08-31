@@ -25,19 +25,14 @@ public class TabelaHashClientes {
     public TabelaHashClientes(Cliente[] clientes) {
         this(calcularCapacidade(clientes));
         if (clientes == null) {
-            System.out.println("[DEBUG HASH] O array de clientes recebido é NULO!");
             return;
         }
 
-        System.out.println("[DEBUG HASH] Iniciando inserção de " + clientes.length + " clientes na tabela hash...");
-        int inseridos = 0;
         for (Cliente cliente : clientes) {
             if (cliente != null) {
                 inserir(cliente);
-                inseridos++;
             }
         }
-        System.out.println("[DEBUG HASH] Total de clientes inseridos com sucesso: " + inseridos);
     }
 
     private TabelaHashClientes(int capacidade) {
@@ -121,8 +116,6 @@ public class TabelaHashClientes {
 
         String cpfNormalizado = normalizarCpf(cpf);
         int indice = calcularIndice(cpfNormalizado);
-
-        System.out.println("[DEBUG HASH] Buscando CPF normalizado: '" + cpfNormalizado + "' no índice da tabela: " + indice);
 
         NoHash atual = tabela[indice];
         while (atual != null) {
