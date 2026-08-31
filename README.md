@@ -115,7 +115,11 @@ Ao executar a classe `Main`, o sistema abre o painel central da **Geek Byte Brew
 4. Comparar as estratégias utilizadas em cada tipo de consulta.
 
 ### Capturas de Tela do Sistema
-<img src="Docs/assets/Foto1" width="300"/> <img src="Docs/assets/Foto2" width="300"/> <img src="Docs/assets/Foto3" width="300"/><img src="Docs/assets/Foto4" width="300"/>
+
+<img src="Docs/assets/Foto1.jpeg" width="300"/> &nbsp; 
+<img src="Docs/assets/Foto2.jpeg" width="300"/> &nbsp; 
+<img src="Docs/assets/Foto3.jpeg" width="300"/> &nbsp; 
+<img src="Docs/assets/Foto4.jpeg" width="300"/>
 
 ## Equipe de Desenvolvimento
 
