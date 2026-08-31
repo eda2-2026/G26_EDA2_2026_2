@@ -31,17 +31,18 @@ public final class CatalogoClientes {
         Cliente[] clientes = new Cliente[QUANTIDADE_CLIENTES];
         int indice = 0;
 
+        geracao:
         for (String primeiroNome : NOMES_IBGE) {
-            for (String segundoNome : NOMES_IBGE) {
-                if (primeiroNome.equals(segundoNome)) {
-                    continue;
-                }
-                for (String sobrenome : SOBRENOMES_IBGE) {
+            for (String primeiroSobrenome : SOBRENOMES_IBGE) {
+                for (String segundoSobrenome : SOBRENOMES_IBGE) {
+                    if (primeiroSobrenome.equals(segundoSobrenome)) {
+                        continue;
+                    }
                     if (indice == clientes.length) {
-                        break;
+                        break geracao;
                     }
                     int numero = indice + 1;
-                    String nome = primeiroNome + " " + segundoNome + " " + sobrenome;
+                    String nome = primeiroNome + " " + primeiroSobrenome + " " + segundoSobrenome;
                     String cpf = criarCpfFicticio(numero);
                     clientes[indice] = numero % 10 == 0 ? vip(nome, cpf) : comum(nome, cpf);
                     indice++;

@@ -42,14 +42,14 @@ public class BuscaBinariaClientesTest {
     }
 
     private void deveEncontrarClienteConhecidoPorNome() {
-        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Maria Jose Silva");
+        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Maria Silva Santos");
         verificar(resultado.encontrou(), "O cliente conhecido deveria ser encontrado.");
         verificar("900.000.000-01".equals(resultado.getCliente().getCpf()), "CPF incorreto.");
         validarMetricas(resultado);
     }
 
     private void deveEncontrarClienteDeNumeroVinteMilPorNome() {
-        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Eduardo Rodrigo Carvalho");
+        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "Eduardo Batista Soares");
         verificar(resultado.encontrou(), "O cliente de número 20.000 deveria ser encontrado.");
         verificar("900.000.200-00".equals(resultado.getCliente().getCpf()), "CPF fictício incorreto.");
         validarMetricas(resultado);
@@ -64,7 +64,7 @@ public class BuscaBinariaClientesTest {
     }
 
     private void deveIgnorarMaiusculasEspacosExternosPorNome() {
-        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "  maria jose silva  ");
+        ResultadoBuscaCliente resultado = busca.buscarPorNome(clientes, "  maria silva santos  ");
         verificar(resultado.encontrou(), "A busca por nome deveria ignorar caixa e espaços externos.");
         verificar("900.000.000-01".equals(resultado.getCliente().getCpf()), "Cliente incorreto.");
     }

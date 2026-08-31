@@ -32,7 +32,7 @@ public class TabelaHashClientesTest {
     private void deveEncontrarClienteQualquerPorCpf() {
         ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf("900.000.000-42");
         verificar(resultado.encontrou(), "O cliente com CPF 900.000.000-42 deveria ser encontrado.");
-        verificar("Maria Ana Gomes".equals(resultado.getCliente().getNome()),
+        verificar("Maria Santos Araujo".equals(resultado.getCliente().getNome()),
                 "Nome do cliente incorreto.");
         validarMetricasHash(resultado);
     }
@@ -54,7 +54,7 @@ public class TabelaHashClientesTest {
     private void deveEncontrarClienteDeNumeroVinteMilPorCpf() {
         ResultadoBuscaCliente resultado = tabelaHash.buscarPorCpf("90000020000");
         verificar(resultado.encontrou(), "O cliente de número 20.000 deveria ser encontrado pelo CPF.");
-        verificar("Eduardo Rodrigo Carvalho".equals(resultado.getCliente().getNome()),
+        verificar("Eduardo Batista Soares".equals(resultado.getCliente().getNome()),
                 "Nome do cliente incorreto.");
         validarMetricasHash(resultado);
     }
