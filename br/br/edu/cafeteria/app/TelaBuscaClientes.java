@@ -95,7 +95,7 @@ public class TelaBuscaClientes extends JFrame {
         titulo.setForeground(AZUL_ESCURO);
 
         JLabel subtitulo = new JLabel(
-                "Catálogo com 70 clientes ordenados", SwingConstants.CENTER);
+                "Base com 20.000 clientes ordenados", SwingConstants.CENTER);
         subtitulo.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
 
         JPanel textos = new JPanel(new GridLayout(2, 1));
