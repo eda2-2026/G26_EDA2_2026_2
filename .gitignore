@@ -1,6 +1,5 @@
 .idea/
-<<<<<<< HEAD
 /bin/
-=======
 out/
->>>>>>> 42f81b04945422d70c95857db6f0aecf8b015752
+*.class
+hs_err_pid*.log

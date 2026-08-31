@@ -64,43 +64,44 @@ Os clientes podem ser consultados de duas maneiras:
 
 Com 20.000 clientes, a busca binária precisa de no máximo aproximadamente 15 comparações. A tabela hash utiliza o CPF normalizado como chave e trata colisões por encadeamento separado.
 
-## 💻 Como Executar
+## 💻 Como Baixar e Executar
 
 ### Pré-requisitos
 
 * JDK 17 ou superior instalado.
-* Git instalado apenas se o projeto for clonado pelo repositório.
+* Git instalado apenas se o projeto for clonado pelo GitHub Desktop ou por uma IDE.
+
+### Opção mais simples: baixar pelo navegador
+
+1. Abra o [repositório no GitHub](https://github.com/eda2-2026/G26_EDA2_2026_2).
+2. Clique em **Code** e depois em **Download ZIP**.
+3. Extraia o arquivo em uma pasta de sua preferência, como `Documentos\Projetos\GeekByteBrew`.
+4. Abra a pasta extraída e dê dois cliques no arquivo `executar.bat`.
+5. Aguarde a compilação. O painel da cafeteria será aberto automaticamente.
+
+O atalho compila o projeto em uma pasta temporária do Windows e abre somente a interface gráfica. Não é necessário abrir o PowerShell nem manter o projeto em uma pasta específica.
+
+### Clonando com o GitHub Desktop
+
+1. Instale e abra o [GitHub Desktop](https://desktop.github.com/).
+2. Escolha **File > Clone repository > URL**.
+3. Informe `https://github.com/eda2-2026/G26_EDA2_2026_2.git`.
+4. Em **Local path**, escolha uma pasta comum, como `Documentos\Projetos\GeekByteBrew`.
+5. Clique em **Clone**.
+6. Abra a pasta clonada e dê dois cliques em `executar.bat`.
 
 ### Executando pela IDE
 
-1. Abra o projeto no IntelliJ IDEA, Eclipse ou VS Code.
-2. Configure a pasta `br` da raiz como pasta de código-fonte, se a IDE solicitar.
-3. Localize a classe `br.edu.cafeteria.app.Main`.
-4. Execute o método `main`.
-5. No menu principal, escolha a busca de produtos ou a busca de clientes.
-
-### Executando no Windows PowerShell
-
-Na raiz do projeto, execute:
-
-```powershell
-$pastaBuild = Join-Path $env:TEMP "geek-byte-brew-build"
-$fontes = Get-ChildItem -Path br,testes -Recurse -Filter *.java -File | ForEach-Object FullName
-javac --release 17 -encoding UTF-8 -d $pastaBuild $fontes
-java -cp $pastaBuild br.edu.cafeteria.app.Main
-```
+1. Abra a pasta do projeto no IntelliJ IDEA, Eclipse ou VS Code.
+2. Use o JDK 17 ou superior como SDK do projeto.
+3. Configure a pasta `br` da raiz como pasta de código-fonte, se a IDE solicitar.
+4. Localize a classe `br.edu.cafeteria.app.Main`.
+5. Execute o método `main`.
+6. No menu principal, escolha a busca de produtos ou a busca de clientes.
 
 ## Executando os Testes
 
-Depois de compilar o projeto com os comandos anteriores, execute:
-
-```powershell
-java -cp $pastaBuild testes.BuscaBinariaProdutosTest
-java -cp $pastaBuild testes.TelaBuscaProdutosTest
-java -cp $pastaBuild testes.BuscaBinariaClientesTest
-java -cp $pastaBuild testes.TabelaHashClientesTest
-java -cp $pastaBuild testes.TelaBuscaClientesTest
-```
+Para executar todos os testes sem digitar comandos, dê dois cliques no arquivo `testar.bat`. A janela exibirá o resultado de cada teste e permanecerá aberta ao final para conferência.
 
 Os testes verificam a ordenação e o tamanho dos catálogos, a unicidade dos CPFs, produtos e clientes encontrados ou inexistentes, posições diferentes dos vetores, tratamento do texto informado, métricas de desempenho e inicialização da interface gráfica.
 
