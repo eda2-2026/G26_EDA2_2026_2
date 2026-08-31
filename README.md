@@ -32,10 +32,11 @@ Depois da geração, todos os clientes são ordenados alfabeticamente pelo nome 
 * Medição do tempo e da quantidade de comparações da busca.
 * Desenvolvimento da interface gráfica de consulta de produtos.
 * Criação dos testes da busca binária e da tela de produtos.
+* Revisão e organização da base de dados de clientes com 20.000 registros.
+* Adequação dos nomes dos clientes com base no ranking do Censo 2022 do IBGE.
 
 ### Maria Laura Cabral
 
-* Ampliação do catálogo para 20.000 clientes ordenados alfabeticamente.
 * Implementação da busca binária de clientes por nome.
 * Implementação da tabela hash para busca de clientes por CPF.
 * Desenvolvimento da interface gráfica de consulta de clientes.
