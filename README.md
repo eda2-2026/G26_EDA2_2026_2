@@ -19,7 +19,7 @@ O trabalho foi desenvolvido para o Módulo 1 da disciplina de **Estruturas de Da
 
 ### Origem da Base de Clientes
 
-A base utilizada pela aplicação possui 20.000 clientes mantidos em memória e pesquisáveis pelo nome ou CPF. Os nomes foram formados a partir dos primeiros nomes e sobrenomes mais frequentes apresentados pelo [Censo 2022 do IBGE](https://censo2022.ibge.gov.br/nomes/rankings). Os registros representam clientes fictícios, e os CPFs são fictícios e únicos, sem utilizar dados pessoais reais.
+A base utilizada pela aplicação possui 20.000 clientes mantidos em memória e pesquisáveis pelo nome ou CPF. Cada nome completo contém um primeiro nome e dois sobrenomes diferentes, selecionados entre os mais frequentes apresentados pelo [Censo 2022 do IBGE](https://censo2022.ibge.gov.br/nomes/rankings). Os registros representam clientes fictícios, e os CPFs são fictícios e únicos, sem utilizar dados pessoais reais.
 
 Depois da geração, todos os clientes são ordenados alfabeticamente pelo nome para permitir a busca binária. A tabela hash é criada com capacidade proporcional à base para evitar excesso de colisões nas consultas por CPF.
 
