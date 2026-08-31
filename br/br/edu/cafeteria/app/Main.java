@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         configurarAparenciaDoSistema();
-        SwingUtilities.invokeLater(() -> new TelaBuscaProdutos().setVisible(true));
+        SwingUtilities.invokeLater(() -> new TelaMenuPrincipal().setVisible(true));
     }
 
     private static void configurarAparenciaDoSistema() {
