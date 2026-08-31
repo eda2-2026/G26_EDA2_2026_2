@@ -116,10 +116,8 @@ Ao executar a classe `Main`, o sistema abre o painel central da **Geek Byte Brew
 
 ### Capturas de Tela do Sistema
 
-<img src="Docs/assets/Foto1.jpeg" width="300"/> &nbsp; 
-<img src="Docs/assets/Foto2.jpeg" width="300"/> &nbsp; 
-<img src="Docs/assets/Foto3.jpeg" width="300"/> &nbsp; 
-<img src="Docs/assets/Foto4.jpeg" width="300"/>
+
+| <img src="Docs/assets/foto1.jpeg" width="250"/> | <img src="Docs/assets/Foto2.jpeg" width="250"/> | <img src="Docs/assets/foto3.jpeg" width="250"/> | <img src="Docs/assets/Foto4.jpeg" width="250"/> |
 
 ## Equipe de Desenvolvimento
 
