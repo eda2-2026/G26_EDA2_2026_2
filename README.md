@@ -127,7 +127,7 @@ Ao executar a classe `Main`, o sistema abre o painel central da **Geek Byte Brew
 | Matrícula: **242004671** | Matrícula: **232005361** |
 | [`@diangellis`](https://github.com/diangellis) | [`@Maria-Laura-Regis`](https://github.com/Maria-Laura-Regis) |
 
-## Link da Apresentação
+### 🎥 Apresentação do Projeto
 
-(https://https://youtu.be/embed/q4q3ZHz4Ssk)
+[![Assista à Apresentação do Sistema](https://img.youtube.com/vi/q4q3ZHz4Ssk/hqdefault.jpg)](https://youtu.be/q4q3ZHz4Ssk)
 
